@@ -1,0 +1,178 @@
+##  **Interactive Tableau Dashboard — Visual Analysis Project**
+
+###  **Overview**
+
+This project uses Tableau to visualize and analyze price trends and patterns across multiple measures.
+The data was reshaped and used to build **four interactive visualizations**:
+
+1. Multi-line Time Series
+2. Histogram Distribution
+3. Scatter Plot (Dynamic Measure Comparison)
+4. Boxplot (Monthly Distribution & Outliers)
+
+---
+
+##  **Data Preparation**
+
+**Steps followed:**
+
+1. Connected the Excel dataset to Tableau.
+2. On the **Data Source** page, selected all price-related columns (columns 2–19).
+3. Right-click → **Pivot**.
+4. Renamed generated fields:
+
+   * `Pivot Field Names` → **Measure**
+   * `Pivot Field Values` → **Value**
+5. Ensured `Date` is recognized as **Date type**.
+
+ **Why this helps:**
+This “long” format allows all measures to be analyzed flexibly with parameters and filters.
+
+---
+
+##  **Visualization 1 — Multi-line Time Series**
+
+**Goal:** Show time-based trends and allow users to select which measures to view.
+
+**Steps:**
+
+1. Create a **new worksheet** → rename to **Time Series – Multi Measure**.
+2. Drag **Date → Columns**, right-click → choose desired granularity (e.g., *Month*).
+3. Drag **Value → Rows**.
+4. Drag **Measure → Color** and also **Measure → Filters**.
+5. On the Filter card → select **Multiple Values (dropdown)** for user multi-selection.
+6. Change **Marks type → Line**.
+
+ **Result:**
+A clean time series chart showing the trend of one or more selected measures over time.
+
+---
+
+##  **Visualization 2 — Histogram (Distribution of Selected Measure)**
+
+**Goal:** Show the distribution of price values for the chosen measure.
+
+**Steps:**
+
+1. Created a **calculated field**:
+
+   * Name: `Number of Records`
+   * Formula: `1`
+2. New sheet → rename to **Histogram – Distribution**.
+3. Drag **Value → Columns**.
+
+   * Right-click `Value` → **Create → Bins…** → choose bin size (e.g., 5, 10, or Automatic).
+   * Replace original Value with `Value (bin)` on Columns.
+4. Drag **Number of Records → Rows**.
+5. Drag **Measure → Filters** → **Show Filter** → choose **Single/Multiple Values dropdown**.
+6. Remove `SUM(Value)` if Tableau adds it automatically to Columns.
+
+ **Result:**
+A histogram that displays how the values of a selected measure are distributed across ranges.
+
+---
+
+##  **Visualization 3 — Scatter Plot (Compare Two Measures)**
+
+**Goal:** Allow users to select any two measures (X and Y) to visualize their relationship.
+
+**Steps:**
+
+### Step 1 — Create Parameters
+
+1. Right-click in **Data Pane → Create Parameter** → Name it **X Measure**.
+
+   * Data type: *String*
+   * Allowable values: *List* → *Add from Field → Measure* → OK.
+2. Repeat the same for **Y Measure**.
+3. Right-click both → **Show Parameter Control** (they appear as dropdowns).
+
+### Step 2 — Create Calculated Fields
+
+* **X Value**
+
+  ```
+  IF [Measure] = [X Measure] THEN [Value] END
+  ```
+* **Y Value**
+
+  ```
+  IF [Measure] = [Y Measure] THEN [Value] END
+  ```
+
+### Step 3 — Aggregate by Date
+
+Create two more calculated fields to ensure one value per date:
+
+* **X per Date**
+
+  ```
+  { FIXED [Date] : MAX(IF [Measure] = [X Measure] THEN [Value] END) }
+  ```
+* **Y per Date**
+
+  ```
+  { FIXED [Date] : MAX(IF [Measure] = [Y Measure] THEN [Value] END) }
+  ```
+
+### Step 4 — Build Scatter Plot
+
+1. New sheet → rename to **Scatter – X vs Y**.
+2. Drag **X per Date → Columns**, **Y per Date → Rows**.
+3. Drag **Date → Detail** (each point = one date).
+4. Set **Marks type → Circle**.
+5. Optional: Drag **Measure → Color** for grouping.
+
+### Step 5 — Add Trend Line
+
+* Go to **Analytics Pane → drag “Trend Line” → drop on chart → choose Linear.**
+
+ **Result:**
+A dynamic scatter plot that lets users choose any two measures to compare and automatically see their linear relationship through a trend line.
+
+---
+
+##  **Visualization 4 — Boxplot (Monthly Distribution & Outliers)**
+
+**Goal:** Show the monthly distribution and detect outliers for a selected measure.
+
+**Steps:**
+
+1. Create a **new worksheet** → rename it **Monthly Boxplot**.
+2. Drag **Date → Columns** → change to **Month(Date)**.
+3. Drag **Value → Rows**.
+4. Drag **Measure → Filters** → choose one measure → click OK.
+5. Go to **Analytics Pane → drag Box Plot → drop on chart**.
+
+Each box now represents:
+
+* **Median** (middle line)
+* **Quartiles** (box edges)
+* **Outliers** (individual points)
+
+ **Optional (Interactivity):**
+Create a parameter named **Select Measure**, add all measure names, and use it to dynamically switch the displayed metric.
+
+ **Result:**
+A boxplot showing monthly value spread, median, and outliers for the selected measure.
+
+---
+
+##  **Final Dashboard**
+
+1. Go to **Dashboard → New Dashboard**.
+2. Drag and drop all four worksheets.
+3. Add relevant **titles and filters** (e.g., Measure filters, X/Y measure selectors).
+4. Adjust layout for clean, minimal, and responsive visuals.
+
+ **End Result:**
+An interactive dashboard that allows users to explore:
+
+* Time trends
+* Distributions
+* Correlations
+* Outliers
+
+All dynamically controlled through filters and parameters.
+
+
