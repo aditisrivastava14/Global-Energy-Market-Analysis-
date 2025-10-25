@@ -43,3 +43,5 @@ Multi-line Time Series: Visualizes time-based trends and allows users to select 
 Histogram Distribution: Displays the frequency and distribution of values for any chosen measure.
 
 Scatter Plot (Dynamic Measure Comparison): Utilizes parameters and Level of Detail (LOD) expressions to allow users to dynamically compare the correlation between any two selected measures (X vs. Y).
+
+Box Plot : To represent median, quartiles and outliers.
