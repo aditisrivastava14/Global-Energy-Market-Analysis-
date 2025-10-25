@@ -1,0 +1,38 @@
+## Exploratory Data Analysis using Python
+
+import pandas as pd
+df = pd.read_excel("/Users/aditi/Documents/Apana Time/Data set Apana Time.xlsx")
+
+import numpy as np
+
+# Drop the date column for numerical analysis
+numeric_df = df.select_dtypes(include=[np.number])
+
+# Central Tendency
+mean_values = numeric_df.mean()
+median_values = numeric_df.median()
+mode_values = numeric_df.mode().iloc[0]
+
+# Dispersion
+variance_values = numeric_df.var()
+std_values = numeric_df.std()
+range_values = numeric_df.max() - numeric_df.min()
+
+# Skewness and Kurtosis
+skewness_values = numeric_df.skew()
+kurtosis_values = numeric_df.kurtosis()
+
+# Combine results
+eda_summary = pd.DataFrame({
+    "Mean": mean_values,
+    "Median": median_values,
+    "Mode": mode_values,
+    "Variance": variance_values,
+    "Std_Deviation": std_values,
+    "Range": range_values,
+    "Skewness": skewness_values,
+    "Kurtosis": kurtosis_values
+})
+
+# Display Results
+print(eda_summary)
