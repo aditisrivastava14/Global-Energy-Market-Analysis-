@@ -1,5 +1,3 @@
-Exploratory Data Analysis using MySQL Workbench 
-
 SET GLOBAL local_infile=1;
 
 CREATE DATABASE IF NOT EXISTS eda_project;
@@ -35,6 +33,55 @@ FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
 IGNORE 1 ROWS;
+
+-- Check for NULL values
+
+SELECT 
+    SUM(CASE WHEN Date IS NULL THEN 1 ELSE 0 END) AS Date_Nulls,
+    SUM(CASE WHEN Coal_RB_4800_FOB_London_Close_USD IS NULL THEN 1 ELSE 0 END) AS RB_4800_Nulls,
+    SUM(CASE WHEN Coal_RB_5500_FOB_London_Close_USD IS NULL THEN 1 ELSE 0 END) AS RB_5500_Nulls,
+    SUM(CASE WHEN Price_WTI IS NULL THEN 1 ELSE 0 END) AS Price_WTI_Nulls,
+    SUM(CASE WHEN Price_Brent_Oil IS NULL THEN 1 ELSE 0 END) AS Price_Brent_Nulls,
+    SUM(CASE WHEN Price_Natural_Gas IS NULL THEN 1 ELSE 0 END) AS NaturalGas_Nulls,
+    SUM(CASE WHEN Price_Indian_en_exg_rate IS NULL THEN 1 ELSE 0 END) AS ExchangeRate_Nulls
+FROM market_data;
+
+SET SQL_SAFE_UPDATES = 0;			-- turn off the safe update feature
+
+-- Remove NULL values
+
+DELETE FROM market_data
+WHERE 
+    Date IS NULL OR
+    Coal_RB_4800_FOB_London_Close_USD IS NULL OR
+    Coal_RB_5500_FOB_London_Close_USD IS NULL OR
+    Coal_RB_5700_FOB_London_Close_USD IS NULL OR
+    Coal_RB_6000_FOB_CurrentWeek_Avg_USD IS NULL OR
+    Coal_India_5500_CFR_London_Close_USD IS NULL OR
+    Price_WTI IS NULL OR
+    Price_Brent_Oil IS NULL OR
+    Price_Dubai_Brent_Oil IS NULL OR
+    Price_ExxonMobil IS NULL OR
+    Price_Shenhua IS NULL OR
+    Price_All_Share IS NULL OR
+    Price_Mining IS NULL OR
+    Price_LNG_Japan_Korea_Marker_PLATTS IS NULL OR
+    Price_ZAR_USD IS NULL OR
+    Price_Natural_Gas IS NULL OR
+    Price_ICE IS NULL OR
+    Price_Dutch_TTF IS NULL OR
+    Price_Indian_en_exg_rate IS NULL;
+
+-- Confirm Cleaning
+
+SELECT COUNT(*) AS Total_Nulls
+FROM market_data
+WHERE 
+    Date IS NULL OR
+    Coal_RB_4800_FOB_London_Close_USD IS NULL OR
+    Coal_RB_5500_FOB_London_Close_USD IS NULL OR
+    Price_WTI IS NULL;
+
 
 -- Measures of Central Tendency --
 
@@ -108,9 +155,3 @@ Price_WTI,
 (SELECT STDDEV_POP(Price_WTI) FROM market_data) AS stddev_price
 FROM market_data
 ) AS derived;
-
-
-
-
-
-
