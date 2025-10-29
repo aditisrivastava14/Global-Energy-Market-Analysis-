@@ -24,7 +24,7 @@ The Python script was used for the initial, comprehensive EDA. It calculated the
 
 MySQL Workbench
 
-Database competency was demonstrated by setting up the market data schema and executing complex SQL queries. Core metrics were calculated using built-in functions, while advanced statistics like Median, Skewness, and Kurtosis required translating complex statistical formulae into custom, multi-step database code.
+Database competency was demonstrated by setting up the market data schema and executing complex SQL queries. Removed the NULL values, core metrics were calculated using built-in functions, while advanced statistics like Median, Skewness, and Kurtosis required translating complex statistical formulae into custom, multi-step database code.
 
 Excel / Google Sheets
 
