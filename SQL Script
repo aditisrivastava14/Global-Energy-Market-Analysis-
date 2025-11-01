@@ -87,24 +87,251 @@ WHERE
 
 -- 1. Mean
 
-SELECT AVG(Price_WTI) AS Mean_Price_WTI
+SELECT
+    AVG(Coal_RB_4800_FOB_London_Close_USD) AS Mean_Coal_RB_4800,
+    AVG(Coal_RB_5500_FOB_London_Close_USD) AS Mean_Coal_RB_5500,
+    AVG(Coal_RB_5700_FOB_London_Close_USD) AS Mean_Coal_RB_5700,
+    AVG(Coal_RB_6000_FOB_CurrentWeek_Avg_USD) AS Mean_Coal_RB_6000,
+    AVG(Coal_India_5500_CFR_London_Close_USD) AS Mean_Coal_India,
+    AVG(Price_WTI) AS Mean_Price_WTI,
+    AVG(Price_Brent_Oil) AS Mean_Price_Brent,
+    AVG(Price_Dubai_Brent_Oil) AS Mean_Price_Dubai,
+    AVG(Price_ExxonMobil) AS Mean_ExxonMobil,
+    AVG(Price_Shenhua) AS Mean_Shenhua,
+    AVG(Price_All_Share) AS Mean_All_Share,
+    AVG(Price_Mining) AS Mean_Mining,
+    AVG(Price_LNG_Japan_Korea_Marker_PLATTS) AS Mean_LNG,
+    AVG(Price_ZAR_USD) AS Mean_ZAR_USD,
+    AVG(Price_Natural_Gas) AS Mean_Natural_Gas,
+    AVG(Price_ICE) AS Mean_ICE,
+    AVG(Price_Dutch_TTF) AS Mean_Dutch_TTF,
+    AVG(Price_Indian_en_exg_rate) AS Mean_ExchangeRate
 FROM market_data;
+
 
 -- 2. Median
 
 SELECT 
 AVG(mid_values) AS Median_Price_WTI
 FROM (
-SELECT t1.Price_WTI AS mid_values
-FROM market_data t1
-WHERE (
-SELECT COUNT(*) 
-FROM market_data t2 
-WHERE t2.Price_WTI <= t1.Price_WTI
-) >= (SELECT COUNT(*) FROM market_data)/2
-ORDER BY t1.Price_WTI
-LIMIT 2
+  SELECT t1.Price_WTI AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_WTI <= t1.Price_WTI
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_WTI
+  LIMIT 2
 ) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Coal_RB_4800_FOB_London_Close_USD
+FROM (
+  SELECT t1.Coal_RB_4800_FOB_London_Close_USD AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Coal_RB_4800_FOB_London_Close_USD <= t1.Coal_RB_4800_FOB_London_Close_USD
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Coal_RB_4800_FOB_London_Close_USD
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Coal_RB_5500_FOB_London_Close_USD
+FROM (
+  SELECT t1.Coal_RB_5500_FOB_London_Close_USD AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Coal_RB_5500_FOB_London_Close_USD <= t1.Coal_RB_5500_FOB_London_Close_USD
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Coal_RB_5500_FOB_London_Close_USD
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Coal_RB_6000_FOB_CurrentWeek_Avg_USD
+FROM (
+  SELECT t1.Coal_RB_6000_FOB_CurrentWeek_Avg_USD AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Coal_RB_6000_FOB_CurrentWeek_Avg_USD <= t1.Coal_RB_6000_FOB_CurrentWeek_Avg_USD
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Coal_RB_6000_FOB_CurrentWeek_Avg_USD
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Coal_India_5500_CFR_London_Close_USD
+FROM (
+  SELECT t1.Coal_India_5500_CFR_London_Close_USD AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Coal_India_5500_CFR_London_Close_USD <= t1.Coal_India_5500_CFR_London_Close_USD
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Coal_India_5500_CFR_London_Close_USD
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Price_Brent_Oil
+FROM (
+  SELECT t1.Price_Brent_Oil AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_Brent_Oil <= t1.Price_Brent_Oil
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_Brent_Oil
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Price_Dubai_Brent_Oil
+FROM (
+  SELECT t1.Price_Dubai_Brent_Oil AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_Dubai_Brent_Oil <= t1.Price_Dubai_Brent_Oil
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_Dubai_Brent_Oil
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Price_ExxonMobil
+FROM (
+  SELECT t1.Price_ExxonMobil AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_ExxonMobil <= t1.Price_ExxonMobil
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_ExxonMobil
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Price_Shenhua
+FROM (
+  SELECT t1.Price_Shenhua AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_Shenhua <= t1.Price_Shenhua
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_Shenhua
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Price_All_Share
+FROM (
+  SELECT t1.Price_All_Share AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_All_Share <= t1.Price_All_Share
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_All_Share
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Price_Mining
+FROM (
+  SELECT t1.Price_Mining AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_Mining <= t1.Price_Mining
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_Mining
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Price_LNG_Japan_Korea_Marker_PLATTS
+FROM (
+  SELECT t1.Price_LNG_Japan_Korea_Marker_PLATTS AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_LNG_Japan_Korea_Marker_PLATTS <= t1.Price_LNG_Japan_Korea_Marker_PLATTS
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_LNG_Japan_Korea_Marker_PLATTS
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Price_ZAR_USD
+FROM (
+  SELECT t1.Price_ZAR_USD AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_ZAR_USD <= t1.Price_ZAR_USD
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_ZAR_USD
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Price_Natural_Gas
+FROM (
+  SELECT t1.Price_Natural_Gas AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_Natural_Gas <= t1.Price_Natural_Gas
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_Natural_Gas
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Price_ICE
+FROM (
+  SELECT t1.Price_ICE AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_ICE <= t1.Price_ICE
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_ICE
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Price_Dutch_TTF
+FROM (
+  SELECT t1.Price_Dutch_TTF AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_Dutch_TTF <= t1.Price_Dutch_TTF
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_Dutch_TTF
+  LIMIT 2
+) AS temp;
+
+SELECT 
+AVG(mid_values) AS Median_Price_Indian_en_exg_rate
+FROM (
+  SELECT t1.Price_Indian_en_exg_rate AS mid_values
+  FROM market_data t1
+  WHERE (
+    SELECT COUNT(*) FROM market_data t2 
+    WHERE t2.Price_Indian_en_exg_rate <= t1.Price_Indian_en_exg_rate
+  ) >= (SELECT COUNT(*) FROM market_data)/2
+  ORDER BY t1.Price_Indian_en_exg_rate
+  LIMIT 2
+) AS temp;
+
 
 -- 3. Mode
 
@@ -114,44 +341,348 @@ GROUP BY Price_WTI
 ORDER BY Frequency DESC
 LIMIT 1;
 
+SELECT Coal_RB_4800_FOB_London_Close_USD AS Mode_Coal_RB_4800_FOB_London_Close_USD, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Coal_RB_4800_FOB_London_Close_USD
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Coal_RB_5500_FOB_London_Close_USD AS Mode_Coal_RB_5500_FOB_London_Close_USD, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Coal_RB_5500_FOB_London_Close_USD
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Coal_RB_5700_FOB_London_Close_USD AS Mode_Coal_RB_5700_FOB_London_Close_USD, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Coal_RB_5700_FOB_London_Close_USD
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Coal_RB_6000_FOB_CurrentWeek_Avg_USD AS Mode_Coal_RB_6000_FOB_CurrentWeek_Avg_USD, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Coal_RB_6000_FOB_CurrentWeek_Avg_USD
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Coal_India_5500_CFR_London_Close_USD AS Mode_Coal_India_5500_CFR_London_Close_USD, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Coal_India_5500_CFR_London_Close_USD
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Price_Brent_Oil AS Mode_Price_Brent_Oil, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Price_Brent_Oil
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Price_Dubai_Brent_Oil AS Mode_Price_Dubai_Brent_Oil, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Price_Dubai_Brent_Oil
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Price_ExxonMobil AS Mode_Price_ExxonMobil, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Price_ExxonMobil
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Price_Shenhua AS Mode_Price_Shenhua, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Price_Shenhua
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Price_All_Share AS Mode_Price_All_Share, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Price_All_Share
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Price_Mining AS Mode_Price_Mining, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Price_Mining
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Price_LNG_Japan_Korea_Marker_PLATTS AS Mode_Price_LNG_Japan_Korea_Marker_PLATTS, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Price_LNG_Japan_Korea_Marker_PLATTS
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Price_ZAR_USD AS Mode_Price_ZAR_USD, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Price_ZAR_USD
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Price_Natural_Gas AS Mode_Price_Natural_Gas, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Price_Natural_Gas
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Price_ICE AS Mode_Price_ICE, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Price_ICE
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Price_Dutch_TTF AS Mode_Price_Dutch_TTF, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Price_Dutch_TTF
+ORDER BY Frequency DESC
+LIMIT 1;
+
+SELECT Price_Indian_en_exg_rate AS Mode_Price_Indian_en_exg_rate, COUNT(*) AS Frequency
+FROM market_data
+GROUP BY Price_Indian_en_exg_rate
+ORDER BY Frequency DESC
+LIMIT 1;
+
+
 -- Measures of Dispersion --
 
--- 4. Variance 
+-- 4. Variance & 5. Standard Deviation 
 
-SELECT VAR_POP(Price_WTI) AS Variance_Price_WTI
-FROM market_data;
-
--- 5. Standard Deviation
-
-SELECT STDDEV_POP(Price_WTI) AS StdDev_Price_WTI
+SELECT
+    VAR_POP(Coal_RB_4800_FOB_London_Close_USD) AS Var_RB_4800,
+    STDDEV_POP(Coal_RB_4800_FOB_London_Close_USD) AS SD_RB_4800,
+    VAR_POP(Coal_RB_5500_FOB_London_Close_USD) AS Var_RB_5500,
+    STDDEV_POP(Coal_RB_5500_FOB_London_Close_USD) AS SD_RB_5500,
+    VAR_POP(Coal_RB_5700_FOB_London_Close_USD) AS Var_RB_5700,
+    STDDEV_POP(Coal_RB_5700_FOB_London_Close_USD) AS SD_RB_5700,
+    VAR_POP(Coal_RB_6000_FOB_CurrentWeek_Avg_USD) AS Var_RB_6000,
+    STDDEV_POP(Coal_RB_6000_FOB_CurrentWeek_Avg_USD) AS SD_RB_6000,
+    VAR_POP(Coal_India_5500_CFR_London_Close_USD) AS Var_Coal_India,
+    STDDEV_POP(Coal_India_5500_CFR_London_Close_USD) AS SD_Coal_India,
+    VAR_POP(Price_WTI) AS Var_WTI,
+    STDDEV_POP(Price_WTI) AS SD_WTI,
+    VAR_POP(Price_Brent_Oil) AS Var_Brent,
+    STDDEV_POP(Price_Brent_Oil) AS SD_Brent,
+    VAR_POP(Price_Dubai_Brent_Oil) AS Var_Dubai,
+    STDDEV_POP(Price_Dubai_Brent_Oil) AS SD_Dubai,
+    VAR_POP(Price_ExxonMobil) AS Var_Exxon,
+    STDDEV_POP(Price_ExxonMobil) AS SD_Exxon,
+    VAR_POP(Price_Shenhua) AS Var_Shenhua,
+    STDDEV_POP(Price_Shenhua) AS SD_Shenhua,
+    VAR_POP(Price_All_Share) AS Var_AllShare,
+    STDDEV_POP(Price_All_Share) AS SD_AllShare,
+    VAR_POP(Price_Mining) AS Var_Mining,
+    STDDEV_POP(Price_Mining) AS SD_Mining,
+    VAR_POP(Price_LNG_Japan_Korea_Marker_PLATTS) AS Var_LNG,
+    STDDEV_POP(Price_LNG_Japan_Korea_Marker_PLATTS) AS SD_LNG,
+    VAR_POP(Price_ZAR_USD) AS Var_ZAR,
+    STDDEV_POP(Price_ZAR_USD) AS SD_ZAR,
+    VAR_POP(Price_Natural_Gas) AS Var_NaturalGas,
+    STDDEV_POP(Price_Natural_Gas) AS SD_NaturalGas,
+    VAR_POP(Price_ICE) AS Var_ICE,
+    STDDEV_POP(Price_ICE) AS SD_ICE,
+    VAR_POP(Price_Dutch_TTF) AS Var_Dutch,
+    STDDEV_POP(Price_Dutch_TTF) AS SD_Dutch,
+    VAR_POP(Price_Indian_en_exg_rate) AS Var_ExchangeRate,
+    STDDEV_POP(Price_Indian_en_exg_rate) AS SD_ExchangeRate
 FROM market_data;
 
 
 -- 6. Skewness
 
-SELECT 
-(COUNT(*) * SUM(POWER(Price_WTI - avg_price, 3))) / 
-((COUNT(*) - 1) * (COUNT(*) - 2) * POWER(stddev_price, 3)) AS Skewness_Price_WTI
-FROM (
-SELECT 
-Price_WTI,
-(SELECT AVG(Price_WTI) FROM market_data) AS avg_price,
-(SELECT STDDEV_POP(Price_WTI) FROM market_data) AS stddev_price
-FROM market_data
-) AS derived;
+SELECT
+  -- Skewness for Price_WTI
+  (COUNT(*) * SUM(POWER(Price_WTI - (SELECT AVG(Price_WTI) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_WTI) FROM market_data), 3)) AS Skewness_Price_WTI,
+
+  -- Skewness for Coal_RB_4800_FOB_London_Close_USD
+  (COUNT(*) * SUM(POWER(Coal_RB_4800_FOB_London_Close_USD - (SELECT AVG(Coal_RB_4800_FOB_London_Close_USD) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Coal_RB_4800_FOB_London_Close_USD) FROM market_data), 3)) AS Skewness_Coal_RB_4800,
+
+  -- Skewness for Coal_RB_5500_FOB_London_Close_USD
+  (COUNT(*) * SUM(POWER(Coal_RB_5500_FOB_London_Close_USD - (SELECT AVG(Coal_RB_5500_FOB_London_Close_USD) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Coal_RB_5500_FOB_London_Close_USD) FROM market_data), 3)) AS Skewness_Coal_RB_5500,
+
+  -- Skewness for Coal_RB_5700_FOB_London_Close_USD
+  (COUNT(*) * SUM(POWER(Coal_RB_5700_FOB_London_Close_USD - (SELECT AVG(Coal_RB_5700_FOB_London_Close_USD) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Coal_RB_5700_FOB_London_Close_USD) FROM market_data), 3)) AS Skewness_Coal_RB_5700,
+
+  -- Skewness for Coal_RB_6000_FOB_CurrentWeek_Avg_USD
+  (COUNT(*) * SUM(POWER(Coal_RB_6000_FOB_CurrentWeek_Avg_USD - (SELECT AVG(Coal_RB_6000_FOB_CurrentWeek_Avg_USD) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Coal_RB_6000_FOB_CurrentWeek_Avg_USD) FROM market_data), 3)) AS Skewness_Coal_RB_6000,
+
+  -- Skewness for Coal_India_5500_CFR_London_Close_USD
+  (COUNT(*) * SUM(POWER(Coal_India_5500_CFR_London_Close_USD - (SELECT AVG(Coal_India_5500_CFR_London_Close_USD) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Coal_India_5500_CFR_London_Close_USD) FROM market_data), 3)) AS Skewness_Coal_India_5500,
+
+  -- Skewness for Price_Brent_Oil
+  (COUNT(*) * SUM(POWER(Price_Brent_Oil - (SELECT AVG(Price_Brent_Oil) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_Brent_Oil) FROM market_data), 3)) AS Skewness_Price_Brent_Oil,
+
+  -- Skewness for Price_Dubai_Brent_Oil
+  (COUNT(*) * SUM(POWER(Price_Dubai_Brent_Oil - (SELECT AVG(Price_Dubai_Brent_Oil) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_Dubai_Brent_Oil) FROM market_data), 3)) AS Skewness_Price_Dubai_Brent_Oil,
+
+  -- Skewness for Price_ExxonMobil
+  (COUNT(*) * SUM(POWER(Price_ExxonMobil - (SELECT AVG(Price_ExxonMobil) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_ExxonMobil) FROM market_data), 3)) AS Skewness_Price_ExxonMobil,
+
+  -- Skewness for Price_Shenhua
+  (COUNT(*) * SUM(POWER(Price_Shenhua - (SELECT AVG(Price_Shenhua) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_Shenhua) FROM market_data), 3)) AS Skewness_Price_Shenhua,
+
+  -- Skewness for Price_All_Share
+  (COUNT(*) * SUM(POWER(Price_All_Share - (SELECT AVG(Price_All_Share) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_All_Share) FROM market_data), 3)) AS Skewness_Price_All_Share,
+
+  -- Skewness for Price_Mining
+  (COUNT(*) * SUM(POWER(Price_Mining - (SELECT AVG(Price_Mining) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_Mining) FROM market_data), 3)) AS Skewness_Price_Mining,
+
+  -- Skewness for Price_LNG_Japan_Korea_Marker_PLATTS
+  (COUNT(*) * SUM(POWER(Price_LNG_Japan_Korea_Marker_PLATTS - (SELECT AVG(Price_LNG_Japan_Korea_Marker_PLATTS) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_LNG_Japan_Korea_Marker_PLATTS) FROM market_data), 3)) AS Skewness_Price_LNG_Japan_Korea_Marker_PLATTS,
+
+  -- Skewness for Price_ZAR_USD
+  (COUNT(*) * SUM(POWER(Price_ZAR_USD - (SELECT AVG(Price_ZAR_USD) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_ZAR_USD) FROM market_data), 3)) AS Skewness_Price_ZAR_USD,
+
+  -- Skewness for Price_Natural_Gas
+  (COUNT(*) * SUM(POWER(Price_Natural_Gas - (SELECT AVG(Price_Natural_Gas) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_Natural_Gas) FROM market_data), 3)) AS Skewness_Price_Natural_Gas,
+
+  -- Skewness for Price_ICE
+  (COUNT(*) * SUM(POWER(Price_ICE - (SELECT AVG(Price_ICE) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_ICE) FROM market_data), 3)) AS Skewness_Price_ICE,
+
+  -- Skewness for Price_Dutch_TTF
+  (COUNT(*) * SUM(POWER(Price_Dutch_TTF - (SELECT AVG(Price_Dutch_TTF) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_Dutch_TTF) FROM market_data), 3)) AS Skewness_Price_Dutch_TTF,
+
+  -- Skewness for Price_Indian_en_exg_rate
+  (COUNT(*) * SUM(POWER(Price_Indian_en_exg_rate - (SELECT AVG(Price_Indian_en_exg_rate) FROM market_data), 3))) /
+  ((COUNT(*) - 1) * (COUNT(*) - 2) * POWER((SELECT STDDEV_POP(Price_Indian_en_exg_rate) FROM market_data), 3)) AS Skewness_Price_Indian_en_exg_rate
+
+FROM market_data;
 
 -- 7. Kurtosis
 
-SELECT 
-(
-(COUNT(*) * (COUNT(*) + 1) * SUM(POWER(Price_WTI - avg_price, 4))) / 
-((COUNT(*) - 1) * (COUNT(*) - 2) * (COUNT(*) - 3) * POWER(stddev_price, 4))
-) - 
-(3 * POWER(COUNT(*) - 1, 2)) / ((COUNT(*) - 2) * (COUNT(*) - 3)) AS Kurtosis_Price_WTI
+SELECT
+  -- Kurtosis for Price_WTI
+  (SUM(POWER(Price_WTI - avg_Price_WTI, 4)) / COUNT(*)) / POWER(stddev_Price_WTI, 4) AS Kurtosis_Price_WTI,
+
+  -- Kurtosis for Coal_RB_4800_FOB_London_Close_USD
+  (SUM(POWER(Coal_RB_4800_FOB_London_Close_USD - avg_Coal_RB_4800, 4)) / COUNT(*)) / POWER(stddev_Coal_RB_4800, 4) AS Kurtosis_Coal_RB_4800_FOB_London_Close_USD,
+
+  -- Kurtosis for Coal_RB_5500_FOB_London_Close_USD
+  (SUM(POWER(Coal_RB_5500_FOB_London_Close_USD - avg_Coal_RB_5500, 4)) / COUNT(*)) / POWER(stddev_Coal_RB_5500, 4) AS Kurtosis_Coal_RB_5500_FOB_London_Close_USD,
+
+  -- Kurtosis for Coal_RB_5700_FOB_London_Close_USD
+  (SUM(POWER(Coal_RB_5700_FOB_London_Close_USD - avg_Coal_RB_5700, 4)) / COUNT(*)) / POWER(stddev_Coal_RB_5700, 4) AS Kurtosis_Coal_RB_5700_FOB_London_Close_USD,
+
+  -- Kurtosis for Coal_RB_6000_FOB_CurrentWeek_Avg_USD
+  (SUM(POWER(Coal_RB_6000_FOB_CurrentWeek_Avg_USD - avg_Coal_RB_6000, 4)) / COUNT(*)) / POWER(stddev_Coal_RB_6000, 4) AS Kurtosis_Coal_RB_6000_FOB_CurrentWeek_Avg_USD,
+
+  -- Kurtosis for Coal_India_5500_CFR_London_Close_USD
+  (SUM(POWER(Coal_India_5500_CFR_London_Close_USD - avg_Coal_India_5500, 4)) / COUNT(*)) / POWER(stddev_Coal_India_5500, 4) AS Kurtosis_Coal_India_5500_CFR_London_Close_USD,
+
+  -- Kurtosis for Price_Brent_Oil
+  (SUM(POWER(Price_Brent_Oil - avg_Price_Brent_Oil, 4)) / COUNT(*)) / POWER(stddev_Price_Brent_Oil, 4) AS Kurtosis_Price_Brent_Oil,
+
+  -- Kurtosis for Price_Dubai_Brent_Oil
+  (SUM(POWER(Price_Dubai_Brent_Oil - avg_Price_Dubai_Brent_Oil, 4)) / COUNT(*)) / POWER(stddev_Price_Dubai_Brent_Oil, 4) AS Kurtosis_Price_Dubai_Brent_Oil,
+
+  -- Kurtosis for Price_ExxonMobil
+  (SUM(POWER(Price_ExxonMobil - avg_Price_ExxonMobil, 4)) / COUNT(*)) / POWER(stddev_Price_ExxonMobil, 4) AS Kurtosis_Price_ExxonMobil,
+
+  -- Kurtosis for Price_Shenhua
+  (SUM(POWER(Price_Shenhua - avg_Price_Shenhua, 4)) / COUNT(*)) / POWER(stddev_Price_Shenhua, 4) AS Kurtosis_Price_Shenhua,
+
+  -- Kurtosis for Price_All_Share
+  (SUM(POWER(Price_All_Share - avg_Price_All_Share, 4)) / COUNT(*)) / POWER(stddev_Price_All_Share, 4) AS Kurtosis_Price_All_Share,
+
+  -- Kurtosis for Price_Mining
+  (SUM(POWER(Price_Mining - avg_Price_Mining, 4)) / COUNT(*)) / POWER(stddev_Price_Mining, 4) AS Kurtosis_Price_Mining,
+
+  -- Kurtosis for Price_LNG_Japan_Korea_Marker_PLATTS
+  (SUM(POWER(Price_LNG_Japan_Korea_Marker_PLATTS - avg_Price_LNG, 4)) / COUNT(*)) / POWER(stddev_Price_LNG, 4) AS Kurtosis_Price_LNG_Japan_Korea_Marker_PLATTS,
+
+  -- Kurtosis for Price_ZAR_USD
+  (SUM(POWER(Price_ZAR_USD - avg_Price_ZAR_USD, 4)) / COUNT(*)) / POWER(stddev_Price_ZAR_USD, 4) AS Kurtosis_Price_ZAR_USD,
+
+  -- Kurtosis for Price_Natural_Gas
+  (SUM(POWER(Price_Natural_Gas - avg_Price_Natural_Gas, 4)) / COUNT(*)) / POWER(stddev_Price_Natural_Gas, 4) AS Kurtosis_Price_Natural_Gas,
+
+  -- Kurtosis for Price_ICE
+  (SUM(POWER(Price_ICE - avg_Price_ICE, 4)) / COUNT(*)) / POWER(stddev_Price_ICE, 4) AS Kurtosis_Price_ICE,
+
+  -- Kurtosis for Price_Dutch_TTF
+  (SUM(POWER(Price_Dutch_TTF - avg_Price_Dutch_TTF, 4)) / COUNT(*)) / POWER(stddev_Price_Dutch_TTF, 4) AS Kurtosis_Price_Dutch_TTF,
+
+  -- Kurtosis for Price_Indian_en_exg_rate
+  (SUM(POWER(Price_Indian_en_exg_rate - avg_Price_Indian_en_exg_rate, 4)) / COUNT(*)) / POWER(stddev_Price_Indian_en_exg_rate, 4) AS Kurtosis_Price_Indian_en_exg_rate
+
 FROM (
-SELECT 
-Price_WTI,
-(SELECT AVG(Price_WTI) FROM market_data) AS avg_price,
-(SELECT STDDEV_POP(Price_WTI) FROM market_data) AS stddev_price
-FROM market_data
-) AS derived;
+  SELECT 
+    Price_WTI, Coal_RB_4800_FOB_London_Close_USD, Coal_RB_5500_FOB_London_Close_USD, Coal_RB_5700_FOB_London_Close_USD,
+    Coal_RB_6000_FOB_CurrentWeek_Avg_USD, Coal_India_5500_CFR_London_Close_USD, Price_Brent_Oil, Price_Dubai_Brent_Oil,
+    Price_ExxonMobil, Price_Shenhua, Price_All_Share, Price_Mining, Price_LNG_Japan_Korea_Marker_PLATTS,
+    Price_ZAR_USD, Price_Natural_Gas, Price_ICE, Price_Dutch_TTF, Price_Indian_en_exg_rate,
+    
+    -- Precomputed Averages and StdDevs
+    (SELECT AVG(Price_WTI) FROM market_data) AS avg_Price_WTI,
+    (SELECT STDDEV_POP(Price_WTI) FROM market_data) AS stddev_Price_WTI,
+    
+    (SELECT AVG(Coal_RB_4800_FOB_London_Close_USD) FROM market_data) AS avg_Coal_RB_4800,
+    (SELECT STDDEV_POP(Coal_RB_4800_FOB_London_Close_USD) FROM market_data) AS stddev_Coal_RB_4800,
+
+    (SELECT AVG(Coal_RB_5500_FOB_London_Close_USD) FROM market_data) AS avg_Coal_RB_5500,
+    (SELECT STDDEV_POP(Coal_RB_5500_FOB_London_Close_USD) FROM market_data) AS stddev_Coal_RB_5500,
+
+    (SELECT AVG(Coal_RB_5700_FOB_London_Close_USD) FROM market_data) AS avg_Coal_RB_5700,
+    (SELECT STDDEV_POP(Coal_RB_5700_FOB_London_Close_USD) FROM market_data) AS stddev_Coal_RB_5700,
+
+    (SELECT AVG(Coal_RB_6000_FOB_CurrentWeek_Avg_USD) FROM market_data) AS avg_Coal_RB_6000,
+    (SELECT STDDEV_POP(Coal_RB_6000_FOB_CurrentWeek_Avg_USD) FROM market_data) AS stddev_Coal_RB_6000,
+
+    (SELECT AVG(Coal_India_5500_CFR_London_Close_USD) FROM market_data) AS avg_Coal_India_5500,
+    (SELECT STDDEV_POP(Coal_India_5500_CFR_London_Close_USD) FROM market_data) AS stddev_Coal_India_5500,
+
+    (SELECT AVG(Price_Brent_Oil) FROM market_data) AS avg_Price_Brent_Oil,
+    (SELECT STDDEV_POP(Price_Brent_Oil) FROM market_data) AS stddev_Price_Brent_Oil,
+
+    (SELECT AVG(Price_Dubai_Brent_Oil) FROM market_data) AS avg_Price_Dubai_Brent_Oil,
+    (SELECT STDDEV_POP(Price_Dubai_Brent_Oil) FROM market_data) AS stddev_Price_Dubai_Brent_Oil,
+
+    (SELECT AVG(Price_ExxonMobil) FROM market_data) AS avg_Price_ExxonMobil,
+    (SELECT STDDEV_POP(Price_ExxonMobil) FROM market_data) AS stddev_Price_ExxonMobil,
+
+    (SELECT AVG(Price_Shenhua) FROM market_data) AS avg_Price_Shenhua,
+    (SELECT STDDEV_POP(Price_Shenhua) FROM market_data) AS stddev_Price_Shenhua,
+
+    (SELECT AVG(Price_All_Share) FROM market_data) AS avg_Price_All_Share,
+    (SELECT STDDEV_POP(Price_All_Share) FROM market_data) AS stddev_Price_All_Share,
+
+    (SELECT AVG(Price_Mining) FROM market_data) AS avg_Price_Mining,
+    (SELECT STDDEV_POP(Price_Mining) FROM market_data) AS stddev_Price_Mining,
+
+    (SELECT AVG(Price_LNG_Japan_Korea_Marker_PLATTS) FROM market_data) AS avg_Price_LNG,
+    (SELECT STDDEV_POP(Price_LNG_Japan_Korea_Marker_PLATTS) FROM market_data) AS stddev_Price_LNG,
+
+    (SELECT AVG(Price_ZAR_USD) FROM market_data) AS avg_Price_ZAR_USD,
+    (SELECT STDDEV_POP(Price_ZAR_USD) FROM market_data) AS stddev_Price_ZAR_USD,
+
+    (SELECT AVG(Price_Natural_Gas) FROM market_data) AS avg_Price_Natural_Gas,
+    (SELECT STDDEV_POP(Price_Natural_Gas) FROM market_data) AS stddev_Price_Natural_Gas,
+
+    (SELECT AVG(Price_ICE) FROM market_data) AS avg_Price_ICE,
+    (SELECT STDDEV_POP(Price_ICE) FROM market_data) AS stddev_Price_ICE,
+
+    (SELECT AVG(Price_Dutch_TTF) FROM market_data) AS avg_Price_Dutch_TTF,
+    (SELECT STDDEV_POP(Price_Dutch_TTF) FROM market_data) AS stddev_Price_Dutch_TTF,
+
+    (SELECT AVG(Price_Indian_en_exg_rate) FROM market_data) AS avg_Price_Indian_en_exg_rate,
+    (SELECT STDDEV_POP(Price_Indian_en_exg_rate) FROM market_data) AS stddev_Price_Indian_en_exg_rate
+
+  FROM market_data
+) AS stats;
